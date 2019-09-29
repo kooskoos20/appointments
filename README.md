@@ -1,3 +1,7 @@
+#Functionality is not complete.
+#Logout feature was left incompete
+
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
