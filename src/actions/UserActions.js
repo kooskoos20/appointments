@@ -12,7 +12,11 @@ export const login = (username, password) => {
         headers: headers,
         method: "POST"
       })
-        .then(response => dispatch(requestLogin(types.STATE_SUCCESS, response.status)))
+        .then(response => {
+          let reqStatus = types.STATE_FAILURE
+          if(response.status===200) reqStatus = types.STATE_SUCCESS
+            dispatch(requestLogin(reqStatus, response.status))
+        })
         .catch(error => dispatch(requestLogin(types.STATE_FAILURE, JSON.parse(error.message)))
         )
     })
@@ -21,9 +25,7 @@ export const login = (username, password) => {
   export const logout = () => {
     return ((dispatch) => {
         dispatch(clearLoginState())
-    }
-    )
-  
+    })    
   }
 
 

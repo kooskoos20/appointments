@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 import Paper from "@material-ui/core/Paper";
-import Typography from "@material-ui/core/Typography";
 import * as actions from '../actions/UserActions'
 import * as types from '../actions/ActionTypes'
 import { connect } from 'react-redux'
 import FormField from '../components/FormField'
+import {Redirect} from 'react-router-dom'
 
 const styles = theme => ({
   paper: {
@@ -15,7 +15,7 @@ const styles = theme => ({
     height:'600px',
     flexDirection: "column",
     alignItems: "stretch",
-    padding: `${theme.spacing.unit * 8}px ${theme.spacing.unit * 5}px ${theme
+    padding: `${theme.spacing.unit * 8 }px ${theme.spacing.unit * 5}px ${theme
       .spacing.unit * 10}px`
   },
   submit: {
@@ -32,15 +32,7 @@ const styles = theme => ({
     display:'flex',
     justifyContent:'center',
     alignItems:'center',
-    backgroundImage:'linear-gradient(to right,#56CCF2,#2F80ED)'  
-  },
-  forgotPassword :{
-    textAlign : 'center',
-    fontSize: '15px',
-    color     : `${theme.palette.primary.main}`,
-    '&:hover':{
-      textDecoration:'none'
-    }
+    backgroundImage:'linear-gradient(to right,#6441A5,#2a0845)'  
   },
   loginHeader:{
     fontFamily:'Josefin Sans',
@@ -93,7 +85,6 @@ class Login extends Component {
   componentDidUpdate(prevProps, prevState){
     if(this.props.loginRequestStatus && this.props.loginRequestStatus !== 200 && prevProps.loginRequestStatus !== this.props.loginRequestStatus){
       this.setState({error : "Failed to authenticate", password : ''})
-      this.props.logout();
     }
   }
 
@@ -101,7 +92,7 @@ class Login extends Component {
 
   render() {
     
-    if (this.isLocalStateLoggedIn()) window.location = "http://prntscr.com/owssmf";
+    if (this.isLocalStateLoggedIn()) return <Redirect to={'/homepage'} />;
 
     const { classes } = this.props;
     return (
@@ -123,7 +114,7 @@ class Login extends Component {
                       autoComplete="current-password" autoFocus={false}  type="password" 
                       onChange={this.handleChange} label="Password"/>
                 </div>
-                {this.state.error && <div style={{backgroundColor : "#fccaca",margin: '1vh 0 0 0', padding : '2px 2px 2px 7px', borderRadius : '5px',boxSizing: 'border-box', border : 'solid thin #f99393'}}><Typography component='h5' variant='h5' style={{color : 'red'}}>{this.state.error}</Typography></div>}
+                {this.state.error && <div style={{backgroundColor : "#fccaca",margin: '1vh 0 0 0', padding : '2px 2px 2px 7px', borderRadius : '5px',boxSizing: 'border-box', border : 'solid thin #f99393'}}><p style={{color : 'red'}}>{this.state.error}</p></div>}
                 <div className={classes.buttonContainer}>
                   <Button fullWidth
                     variant="contained" color="primary" className={classes.submit} type='submit'>

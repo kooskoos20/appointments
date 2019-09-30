@@ -7,6 +7,10 @@ const UserReducer = (state = initialState, action) => {
     return { ...state, loginState: action.state, requestStatus: action.requestStatus }
   }
   
+  if(types.LOGOUT === action.type){
+    return {...state, loginState: action.state} 
+  }
+  
   return state;
 }
 

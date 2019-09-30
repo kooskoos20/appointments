@@ -23,7 +23,7 @@ const theme = createMuiTheme({
   },
 
   typography: {
-    fontSize: 15,
+    fontSize: 18,
     useNextVariants : true,
     fontFamily: 'Montserrat'
   },
